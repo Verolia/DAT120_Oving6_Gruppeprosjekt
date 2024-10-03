@@ -28,9 +28,9 @@ def les_data(filnavn):
                 try: 
                     dato_tid_objekt = datetime.strptime(dato_tid,'%m.%d.%Y %H:%M')
                     lokal_tidspunkt.append(dato_tid_objekt)
-                    lokal_trykk.append(float(absolutt_trykk))
+                    lokal_trykk.append(float(absolutt_trykk)*10)
                     lokal_temperatur.append(float(temperatur))
-                    bar_trykk.append(float(trykk_barometer))
+                    bar_trykk.append(float(trykk_barometer)*10)
                     bar_dato_objekt = datetime.strptime(bar_tidspunkt,'%m.%d.%Y %H:%M')
                     bar_trykk_tidspunkt.append(bar_dato_objekt)
                 except ValueError:
@@ -38,8 +38,17 @@ def les_data(filnavn):
   
     return lokal_tidspunkt, lokal_trykk, lokal_temperatur, bar_trykk, bar_trykk_tidspunkt
         
-filnavn = "trykk_og_temperaturlogg_rune_time.csv.txt"
-lokal_tidspunkt, lokal_trykk, lokal_temperatur, bar_trykk, bar_trykk_tidspunkt = les_data(filnavn)
+lokal_tidspunkt, lokal_trykk, lokal_temperatur, bar_trykk, bar_trykk_tidspunkt = les_data("trykk_og_temperaturlogg_rune_time.csv.txt")
+
+
+from fil2_funksjon import les_inn_data_2 
+
+# fil2_tidspunkt = []
+# fil2_temperatur = []
+# fil2_trykk = []
+
+fil2_tidspunkt, fil2_trykk, fil2_temperatur = les_inn_data_2("temperatur_trykk_met_samme_rune_time_datasett.csv.txt")
+
 
 def gjennomsnitt(tallene):
     return sum(tallene)/len(tallene)
@@ -57,6 +66,7 @@ gjennomsnitt_dato = lokal_tidspunkt[0::n]
 
 plt.subplot(2, 1, 1)
 plt.plot(lokal_tidspunkt, lokal_temperatur, color="blue", label="Temperatur (Celcius)")
+plt.plot(fil2_tidspunkt, fil2_temperatur, color="green", label="Temperatur (Celcius)")
 plt.plot(gjennomsnitt_dato, gjennomsnitt_t, color="orange")
 plt.legend(['Gjennomsnitt temperatur'])
 plt.grid()
@@ -65,9 +75,9 @@ plt.legend()
 plt.subplot(2, 1, 2)
 plt.plot(lokal_tidspunkt, lokal_trykk, color ="blue", label="Trykk")
 plt.plot(bar_trykk_tidspunkt, bar_trykk, color="orange")
-plt.grid()
 plt.legend()
-
+plt.plot(fil2_tidspunkt, fil2_trykk, color ="green", label="Trykk")
+plt.grid()
 plt.tight_layout()
 plt.show()
 
