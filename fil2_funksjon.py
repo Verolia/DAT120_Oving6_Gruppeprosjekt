@@ -7,7 +7,7 @@ Created on Thu Oct  3 14:05:07 2024
 
 import csv
 from datetime import datetime
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 
 def les_inn_data_2(filnavn): 
@@ -36,16 +36,16 @@ def les_inn_data_2(filnavn):
   
     return fil2_tidspunkt, fil2_trykk, fil2_temperatur
     
-fil2_tidspunkt, fil2_trykk, fil2_temperatur = les_inn_data_2("temperatur_trykk_met_samme_rune_time_datasett.csv.txt")
+# fil2_tidspunkt, fil2_trykk, fil2_temperatur = les_inn_data_2("temperatur_trykk_met_samme_rune_time_datasett.csv.txt")
 
 
-plt.subplot(2, 1, 1)
-plt.plot(fil2_tidspunkt, fil2_temperatur, color="blue", label="Temperatur (Celcius)")
-plt.legend(['Gjennomsnitt temperatur'])
-plt.grid()
-plt.legend()
+# plt.subplot(2, 1, 1)
+# plt.plot(fil2_tidspunkt, fil2_temperatur, color="blue", label="Temperatur (Celcius)")
+# plt.legend(['Gjennomsnitt temperatur'])
+# plt.grid()
+# plt.legend()
 
-plt.subplot(2, 1, 2)
-plt.plot(fil2_tidspunkt, fil2_trykk, color ="blue", label="Trykk")
-plt.grid()
-plt.legend()
+# plt.subplot(2, 1, 2)
+# plt.plot(fil2_tidspunkt, fil2_trykk, color ="blue", label="Trykk")
+# plt.grid()
+# plt.legend()
