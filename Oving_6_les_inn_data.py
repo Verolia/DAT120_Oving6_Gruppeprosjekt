@@ -46,3 +46,18 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
+def gjennomsnitt(tallene):
+    return sum(tallene)/len(tallene)
+n = 60
+
+gjennomsnitt_t = []
+for i in range(0,len(lokal_temperatur),n):
+    split_list = lokal_temperatur[i:n+i]
+    gjennomsnitt_t.append(gjennomsnitt(split_list))
+#print(gjennomsnitt_t)
+
+gjennomsnitt_dato =[]
+gjennomsnitt_dato = lokal_tidspunkt[0::60]
+plt.plot(gjennomsnitt_dato, gjennomsnitt_t)
+plt.legend(['Gjennomsnitt temperatur'])
+plt.savefig("figuren.pdf")
