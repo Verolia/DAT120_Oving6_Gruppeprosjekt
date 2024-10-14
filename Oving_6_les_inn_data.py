@@ -59,14 +59,23 @@ from fil2_funksjon import les_inn_data_2
 fil2_tidspunkt, fil2_trykk, fil2_temperatur = les_inn_data_2("temperatur_trykk_met_samme_rune_time_datasett.csv.txt")
 
 
-def gjennomsnitt(tallene):
-    return sum(tallene)/len(tallene)
-n = 60
+# def gjennomsnitt(tallene):
+#     return sum(tallene)/len(tallene)
+n = 30
 
 gjennomsnitt_t = []
-for i in range(0,len(lokal_temperatur),n):
-    split_list = lokal_temperatur[i:n+i]
-    gjennomsnitt_t.append(gjennomsnitt(split_list))
+resultat = []
+
+for i in range(0, len(lokal_temperatur)):
+    if i > n and i < len(lokal_temperatur)-n:
+        gjennomsnitt = sum(lokal_temperatur[i-n:i+n+1])/(n+n+1)
+        resultat.append(gjennomsnitt)
+    else: 
+        resultat.append(lokal_temperatur[i])
+    
+        
+        # split_list = lokal_temperatur[i:n+i]
+        # gjennomsnitt_t.append(gjennomsnitt(split_list))
 #print(gjennomsnitt_t)
 
 gjennomsnitt_dato =[]
@@ -77,7 +86,7 @@ plt.subplot(2, 1, 1)
 plt.plot(lokal_tidspunkt, lokal_temperatur, color="blue", label="Temperatur ")
 plt.plot(fil2_tidspunkt, fil2_temperatur, color="green", label="Temperatur MET")
 plt.plot(tempfall_tidspunkt, tempfall_temperatur, color="purple", label="Temperatur maks til min")
-plt.plot(gjennomsnitt_dato, gjennomsnitt_t, color="orange", label= "Gjennomsnittstemperatur")
+plt.plot(lokal_tidspunkt, resultat, color="orange", label= "Gjennomsnittstemperatur")
 plt.legend(fontsize="15")
 plt.grid()
 
